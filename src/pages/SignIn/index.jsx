@@ -45,7 +45,12 @@ function handleLogin(e){
                 return el.username === user.username && el.password === user.password
             })
         }
-       
+       if(isExist) {
+        localStorage.setItem("token", user.username);
+        navigate('/');
+       }else{
+        setError('Invalid username or password')
+       }
     }
 }
 
@@ -60,9 +65,8 @@ function handleLogin(e){
           type="text"
           name="username"
           placeholder="Enter your username"
-          
+          ref={usernameRef}
         />
-        <div className="error"></div>
       </div>
       <div className="input-control">
         <label htmlFor="password">Password*</label>
@@ -70,9 +74,9 @@ function handleLogin(e){
           type="password"
           name="password"
           placeholder="Enter your password"
-          
+          ref={passwordRef}
         />
-        <div className="error"></div>
+        <div className="error">{error}</div>
       </div>
       <button className="btn">Sign In</button>
       <Link to="/register">Sign Up</Link>

@@ -16,7 +16,7 @@ function App() {
         navigate('/login');
       }
     }
-  }, [location.pathname, navigate]);
+  }, [navigate]);
 
   function ProtectedRoute({ children, redirect = '/login', isAuthentication }) {
     if (!isAuthentication) {
@@ -33,7 +33,7 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute isAuthentication={token ? true : false} redirect="/login">
+            <ProtectedRoute isAuthentication={token ? true : false}>
               <Home />
             </ProtectedRoute>
           }
